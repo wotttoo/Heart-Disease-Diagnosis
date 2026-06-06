@@ -112,13 +112,13 @@ class HeartDiseasePreprocessor:
             self.pipeline = self.build()
         arr = self.pipeline.fit_transform(X_train, y_train)
         self._feature_names_ = self._extract_feature_names()
-        return pd.DataFrame(arr, columns=self.feature_names_, index=X_train.index)
+        return pd.DataFrame(arr, columns=self._feature_names_, index=X_train.index)
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        if self.pipeline is None or not self.feature_names_:
+        if self.pipeline is None or not self._feature_names_:
             raise RuntimeError('Call fit_transform before transform.')
         arr = self.pipeline.transform(X)
-        return pd.DataFrame(arr, columns=self.feature_names_, index=X.index)
+        return pd.DataFrame(arr, columns=self._feature_names_, index=X.index)
             
     # ------------------------------------------------------------------ #
     #  Mutual-information feature selection                              #
