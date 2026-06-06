@@ -161,3 +161,13 @@ Accuracy comparison charts are saved under `outputs/figures/`:
 | `ensemble_accuracy.png` | Ensemble — Val vs Test accuracy |
 
 EDA figures (feature distributions, scatter plots, correlation with age) are also stored in `outputs/figures/`.
+
+### Accuracy Comparison Charts
+
+| Decision Tree | KNN |
+|:---:|:---:|
+| ![Decision Tree](outputs/figures/dt_accuracy.png) | ![KNN](outputs/figures/knn_accuracy.png) |
+
+| Naive Bayes | Ensemble (Stacking) |
+|:---:|:---:|
+| ![Naive Bayes](outputs/figures/nb_accuracy.png) | ![Ensemble](outputs/figures/ensemble_accuracy.png) |
