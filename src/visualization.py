@@ -127,3 +127,44 @@ class EDAVisualizer:
         plt.savefig('outputs/figures/features_corr_with_age.png')
         plt.show()
     
+# --------------------------------------------------------------------------- #
+#  Standalone result comparison                                               #
+# --------------------------------------------------------------------------- #
+def plot_accuracy_comparison(
+    val_accs: list[float],
+    test_accs: list[float],
+    labels: list[str],
+    title: str = "Accuracy on Val and Test sets",
+    save_path: str | None = None,
+) -> None:
+    """Grouped bar chart comparing validation and test accuracy per experiment."""
+    plt.rcParams["font.family"] = "DejaVu Serif"
+    x = np.arange(len(labels))
+    width = 0.3
+
+    fig, ax = plt.subplots(figsize=(5, 5))
+    r1 = ax.bar(x - width / 2, val_accs, width, label="Validation Accuracy",
+                color="tab:blue", edgecolor="black", linewidth=1.2)
+    r2 = ax.bar(x + width / 2, test_accs, width, label="Test Accuracy",
+                color="tab:red", edgecolor="black", linewidth=1.2)
+
+    ax.set_ylim(0.5, 1.0)
+    ax.set_ylabel("Accuracy")
+    ax.set_title(title)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.legend(ncol=2, loc="upper center")
+
+    for rects in (r1, r2):
+        for rect in rects:
+            h = rect.get_height()
+            ax.annotate(
+                f"{h:.2f}",
+                xy=(rect.get_x() + rect.get_width() / 2, h),
+                ha="center", va="bottom",
+            )
+
+    fig.tight_layout()
+    if save_path:
+        fig.savefig(save_path, dpi=300, bbox_inches="tight")
+    plt.show()
